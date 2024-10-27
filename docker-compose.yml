@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  webnode:
+    env_file: ./Backend/.env
+    container_name: node-api
+    restart: always
+    build: ./Backend
+    ports:
+      - "3002:3001"
+    links:
+      - mongo
+    volumes:
+      - ./Backend/:/app
+  
+  mongo:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - "27020:27017"
+
+
