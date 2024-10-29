@@ -1,16 +1,23 @@
 const mongoose = require("mongoose");
+//const StorageBaseSchema = require("./storage");
 
-
-const StorageScheme = new mongoose.Schema(
-  {
-    foldername: {
-      type: String,
+function Schema(StorageBaseSchema) {
+  const StorageScheme = new mongoose.Schema(
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      // Incluye subdocumentos de tipo Storage dentro de Main
+      storage: [StorageBaseSchema], // Array que puede contener StorageScheme o MainScheme
+    },
+    {
+      timestamps: true,
+      versionKey: false
     }
-  },
-  {
-    timestamps: true,
-    versionKey: false
-  }
-);
+  );
+  return StorageScheme;  
+}
 
-module.exports = mongoose.model("folder", StorageScheme)
+
+module.exports = Schema;

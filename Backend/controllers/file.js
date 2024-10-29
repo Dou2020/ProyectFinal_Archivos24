@@ -1,4 +1,4 @@
-const  {fileModel} = require("./../models")
+const  {userModel} = require("./../models")
 
 /**
  *  Buscar un Archivo
@@ -6,8 +6,15 @@ const  {fileModel} = require("./../models")
  * @param {*} res 
  */
 const getFile = async (req,res)=>{
-    const data = await fileModel.find({});
-    res.send({data})
+
+    const { id } = req.body;
+    const user =  await userModel.findById(id);
+    if (!user) {
+        res.status(500).send({message:"Usuario no encontrado"})
+    }else {
+        const data = user.storage;
+        res.send(data)
+    }
 }
 /**
  * Crear Archivos
@@ -15,10 +22,16 @@ const getFile = async (req,res)=>{
  * @param {*} res 
  */
 const createFile = async(req,res)=>{
-    const { body } = req;
-    console.log(body);
-    const data = await fileModel.create(body);
-    res.send(data);
+    const {body} = req;
+    const user =  await userModel.findById(body.id);
+    if (!user) {
+        res.status(500).send({message:"Usuario no encontrado"})
+    }else {
+        user.storage.push(body.storage);
+        user.save();
+        console.log(user);
+        res.status(200).send({message:"File Ingresado"})
+    }
     
 }
 

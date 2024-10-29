@@ -3,6 +3,7 @@ require("dotenv").config()
 const express = require("express")
 const cors = require("cors")
 const app = express()
+const bodyParser = require("body-parser")
 //conexion DB
 const dbConnect = require("./config/mongo")
 
@@ -12,6 +13,8 @@ app.use(cors())
 app.use(express.json())
 // Realizar Publico la carpeta storage
 app.use(express.static("storage"))
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //instanciando el puerto
 const port = process.env.PORT

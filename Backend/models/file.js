@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const StorageScheme = new mongoose.Schema(
+const fileScheme = new mongoose.Schema(
   {
     url: {
       type: String,
@@ -15,4 +15,4 @@ const StorageScheme = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("file", StorageScheme)
+module.exports = fileScheme

@@ -1,0 +1,21 @@
+    {
+        "useDatabase": "mydb",
+        "createCollection": "users",
+        "documents": [
+            {
+                "name": "admin",
+                "password": "1234",
+                "role": "admin",
+                "storage": [],
+                "share": []
+            },
+            {
+                "name": "user",
+                "password": "1234",
+                "role": "user",
+                "storage": [],
+                "share": []
+            }
+        ]
+    }
+

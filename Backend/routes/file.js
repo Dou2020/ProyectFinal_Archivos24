@@ -5,7 +5,7 @@ const { getFile, createFile } =  require('./../controllers/file');
 /**
  * Route of the file 
  */
-router.get("/",getFile);
+//router.post("/",getFile);
 
 router.post("/", createFile);
 
