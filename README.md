@@ -14,4 +14,8 @@ docker-compose build
 
 docker-compose up
 
+simplificar el compilado y el levantado de la aplicacion utiliza este comando
+
+sudo docker-compose up --build
+
 
