@@ -19,13 +19,14 @@ services:
     ports:
       - "27020:27017"
 
-  angular:
-    container_name: frontend
-    restart: always
-    build: ./Frontend
+  angular-ssr:
+    build: ./Frontend  # Ruta del proyecto Angular con SSR
+    container_name: angular-ssr
     ports:
-      - "4220:4200"
-    links:
+      - "4000:4000"
+    depends_on:
       - webnode
+    environment:
+      - API_URL=http://node-api:3001  # URL para que Angular se comunique con el backend de Node.js
     volumes:
       - ./Frontend/:/app

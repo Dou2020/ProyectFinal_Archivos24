@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {FlowbiteService} from './flowbite.service';
 import { LoginComponent } from "./pages/login/login.component";
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit {
   title = 'Frontend';
 
   ngOnInit(): void {
+      //initFlowbite()
       this.flowbiteService.loadFlowbite(flowbite => {
         console.log('Flowbite loaded', flowbite)
       })
