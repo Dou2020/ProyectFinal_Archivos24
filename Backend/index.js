@@ -6,6 +6,7 @@ const app = express()
 const bodyParser = require("body-parser")
 //conexion DB
 const dbConnect = require("./config/mongo")
+const  { userModel } = require("./models")
 
 // utilizar 
 app.use(cors())
@@ -23,8 +24,17 @@ const port = process.env.PORT
 */
 app.use("/api",require("./routes"))
 
-app.listen(port, () =>{
+app.listen(port, async() =>{
     console.log('Esta funcionando en el puerto:'+port);
+    const user =  await userModel.find();
+    if (user.length < 1) {
+        await userModel.create({name:"user", password:"1234", role: "user", storage:[], share:[]});
+        await userModel.create({name: "admin", password:"1234", role:"admin", storage:[], share:[]});
+        console.log("creado user y admin");
+    }else{
+        console.log("user y admin creado");
+        
+    }
     
 })
 

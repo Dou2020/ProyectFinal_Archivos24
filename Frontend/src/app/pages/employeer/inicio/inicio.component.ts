@@ -3,7 +3,7 @@ import { SidebarComponent } from './../sidebar/sidebar.component'
 import { CarpetaComponent } from '../utils/carpeta/carpeta.component';
 import { ArchivoComponent } from '../utils/archivo/archivo.component';
 import { ImageComponent } from '../utils/image/image.component';
-
+import { ValidateService } from "./../../../services/login/validate.service";
 
 @Component({
   selector: 'app-inicio',
@@ -14,9 +14,16 @@ import { ImageComponent } from '../utils/image/image.component';
 })
 export class InicioEmployeerComponent implements OnInit {
 
-  constructor(){}
+  empl: any[] = []
+
+  constructor(private employeer: ValidateService){
+    this.empl = employeer.getUsuario()
+    console.log(this.empl);
+    
+  }
 
   ngOnInit(): void {
+    this.empl = this.employeer.getUsuario()[0]?.storage
   }
 
 }

@@ -1,14 +1,27 @@
 version: '3'
 
 services:
+  angular-ssr:
+    build: ./Frontend  # Ruta del proyecto Angular con SSR
+    container_name: angular-ssr
+    restart: always
+    ports:
+      - "4010:4000"
+    links:
+      - webnode
+    volumes:
+      - ./Frontend/:/app
+  
   webnode:
     env_file: ./.env
-    container_name: node-api
+    container_name: webnode
     restart: always
     build: ./Backend
     ports:
-      - "3002:3001"
+      - "3010:3001"
     links:
+      - mongo
+    depends_on:
       - mongo
     volumes:
       - ./Backend/:/app
@@ -18,15 +31,6 @@ services:
     image: mongo
     ports:
       - "27020:27017"
-
-  angular-ssr:
-    build: ./Frontend  # Ruta del proyecto Angular con SSR
-    container_name: angular-ssr
-    ports:
-      - "4000:4000"
-    depends_on:
-      - webnode
-    environment:
-      - API_URL=http://node-api:3001  # URL para que Angular se comunique con el backend de Node.js
-    volumes:
-      - ./Frontend/:/app
+networks:
+  default:
+    driver: bridge

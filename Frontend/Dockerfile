@@ -5,9 +5,9 @@ WORKDIR /app
 # Copiar archivos de configuración de package
 COPY package*.json ./
 # Instalar dependencias
-RUN npm install
+RUN npm ci
 # Copiar el resto de los archivos de la aplicación
-COPY . .
+COPY . ./
 # Construir la aplicación con SSR
 RUN npm run build
 
