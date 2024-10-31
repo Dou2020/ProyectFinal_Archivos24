@@ -9,14 +9,14 @@ export class ValidateService {
 
   private apiUrl = window.env?.apiUrl || environment.apiUrl;
   
-  private apiUrl2 = 'api/user/find/';
+  private apiUrl2 = `http://webnode:3001/api/user/find/`;
 
   private usuario: any[] = [];
 
   constructor(private http: HttpClient) { }
   getData(user:any[]) {
     console.log(user);
-    return this.http.post<any[]>(this.apiUrl,user);
+    return this.http.post<any[]>(this.apiUrl2,user);
   }
 
   getUsuario(){
