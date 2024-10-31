@@ -6,14 +6,13 @@ const  { userModel } = require("./../models")
  * @param {*} res 
  */
 const createUser = async (req, res)=> {
-    const { body } = req;
-    console.log(body);
-    const user = await userModel.find({name:body.name})
+    const { name, pass, role } = req.body;
+    const user = await userModel.find({name:name})
     if (user.length > 0) {
         res.status(500).send({message:"Usuario ya ingresado"});
     }else{
-        const data = await userModel.create(body);
-        res.status(200).send({message:"Usuario Ingresado"});
+        const data = await userModel.create({name: name, password: pass, role: role, storage:[], share:[]});
+        res.status(200).send({message:"Usuario Ingresado: "+name});
     }
     
 }
@@ -38,10 +37,10 @@ const findIdUser = async (req, res) => {
 }
 
 const findUser = async (req, res) => {
-    const { name } = req.body;
-    console.log(name);
+    const { usuario,pass } = req.body;
+    console.log(usuario);
     
-    const user = await userModel.find({name:name})
-    res.send(user);
+    const userr = await userModel.find({name:usuario, password:pass})
+    res.send(userr);
 }
 module.exports =  { createUser, getUser, findUser, findIdUser }

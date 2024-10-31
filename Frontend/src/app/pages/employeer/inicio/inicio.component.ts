@@ -9,5 +9,9 @@ import { SidebarComponent } from './../sidebar/sidebar.component'
   styleUrl: './inicio.component.css'
 })
 export class InicioEmployeerComponent {
+  isModalOpen = false;
 
+  toggleModal(): void {
+    this.isModalOpen = !this.isModalOpen;
+  }
 }
